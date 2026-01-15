@@ -83,7 +83,12 @@ class EmailManager:
         self.session.headers.update({'Connection': 'keep-alive'})
     
     def _update_proxy(self):
-        """动态更新代理设置"""
+        """动态更新代理设置（仅在PROXY_EMAIL=true时启用）"""
+        # 邮件API默认不走代理，除非明确设置PROXY_EMAIL=true
+        use_proxy_for_email = os.environ.get('PROXY_EMAIL', '').lower() == 'true'
+        if not use_proxy_for_email:
+            return  # 邮件API不使用代理
+        
         proxy = os.environ.get('PROXY', '') or PROXY
         if proxy and not self.session.proxies:
             self.session.proxies = {'http': proxy, 'https': proxy}
