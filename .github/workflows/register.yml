@@ -23,7 +23,6 @@ env:
   ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
   SYNC_URL: ${{ secrets.SYNC_URL }}
   SYNC_KEY: ${{ secrets.SYNC_KEY }}
-  PROXY: ${{ secrets.PROXY }}
   VLESS_CONFIG: ${{ secrets.VLESS_CONFIG }}
 
 jobs:
